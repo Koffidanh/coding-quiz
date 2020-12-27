@@ -20,7 +20,8 @@ var answer1Btn = document.getElementById("answer1");
 var answer2Btn = document.getElementById("answer2");
 var answer3Btn = document.getElementById("answer3");
 var answer4Btn = document.getElementById("answer4");
-
+var submitBtn = document.getElementById("submit");
+var initial = localStorage.getItem("initial");
 // Add event listener to generate button to open prompts
 startBtn.addEventListener("click", startQuiz);
 answer1Btn.addEventListener("click", startQuiz);
@@ -35,12 +36,16 @@ h1.textContent = "Coding Quiz Challenge";
 var h2 = document.querySelector("#subtext");
 h2.textContent =
   "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+var initiallabel = document.querySelector("#initiallabel");
+var initial = document.querySelector("#initial");
 //Hide button
 answer1Btn.style.display = "none";
 answer2Btn.style.display = "none";
 answer3Btn.style.display = "none";
 answer4Btn.style.display = "none";
-
+submitBtn.style.display = "none";
+initiallabel.style.display = "none";
+initial.style.display = "none";
 //Variables
 var clicked = -1;
 
@@ -58,7 +63,6 @@ function startQuiz() {
   } else {
     // Setting First question Buttons to show and answer
 
-
     // Show the answer buttons
     answer1Btn.style.display = "block";
     answer2Btn.style.display = "block";
@@ -66,107 +70,152 @@ function startQuiz() {
     answer4Btn.style.display = "block";
     // Hide the start button
     startBtn.style.display = "none";
-    if ( clicked < questions.length ) {
+    if (clicked < questions.length) {
       h2.textContent = questions[clicked + 1];
-      clicked++ ;
+      clicked++;
       h2.setAttribute("style", "font-size: 25px");
-    
-    
-    //Set the content attribute to the buttons
-    if (clicked === 0 ){
-    answer1Btn.textContent = "1. strings";
-    answer2Btn.textContent = "2. booleans";
-    answer3Btn.textContent = "3. alerts";
-    answer4Btn.textContent = "4. numbers";
-  }
-  
-  if (answer1Btn.click || answer2Btn.click || answer3Btn.click || answer4Btn.click) {
-    // Setting Second question Buttons to show and answer
-    //Set an attribute for the subtext
-   // h2.textContent = questions[clicked];
-   // h2.setAttribute("style", "font-size: 25px");
-    //Set the content attribute to the buttons
-    if ( clicked === 1){
-    answer1Btn.textContent = "1. quotes";
-    answer2Btn.textContent = "2. curly brackets";
-    answer3Btn.textContent = "3. parentheses";
-    answer4Btn.textContent = "4. square brackets";
-  };
-  }
-  //Setting up third question
-  if (answer1Btn.click || answer2Btn.click || answer3Btn.click || answer4Btn.click) {
-    // Setting third question Buttons to show and answer
-    //Set an attribute for the subtext
-    h2.textContent = questions[clicked];
-    h2.setAttribute("style", "font-size: 25px");
-    //Set the content attribute to the buttons
-    if (clicked === 2){
-    answer1Btn.textContent = "1. numbers and strings";
-    answer2Btn.textContent = "2. other arrays";
-    answer3Btn.textContent = "3. booleans";
-    answer4Btn.textContent = "4. all of the above";
-  };
-    //Setting up fourth question
-  if (answer1Btn.click || answer2Btn.click || answer3Btn.click || answer4Btn.click) {
-    // Setting fourth question Buttons to show and answer
-    //Set an attribute for the subtext
-    h2.textContent = questions[clicked];
-    h2.setAttribute("style", "font-size: 25px");
-    //Set the content attribute to the buttons
-    if(clicked === 3) {
-    answer1Btn.textContent = "1. commas";
-    answer2Btn.textContent = "2. curly brankets";
-    answer3Btn.textContent = "3. quotes";
-    answer4Btn.textContent = "4. parentheses";
-  }
-    //Setting up fifth question
-  if (answer1Btn.click || answer2Btn.click || answer3Btn.click || answer4Btn.click) {
-    // Setting fifth question Buttons to show and answer
-    //Set an attribute for the subtext
-    h2.textContent = questions[clicked];
-    h2.setAttribute("style", "font-size: 25px");
-    //Set the content attribute to the buttons
-    if(clicked === 4){
-    answer1Btn.textContent = "1. JavaScript";
-    answer2Btn.textContent = "2. terminal / bash";
-    answer3Btn.textContent = "3. for loops";
-    answer4Btn.textContent = "4. console.log";
-  };
-  }
-  }
-  }
-}
-}
 
-// Time function
+      //Set the content attribute to the buttons
+      if (clicked === 0) {
+        answer1Btn.textContent = "1. strings";
+        answer2Btn.textContent = "2. booleans";
+        answer3Btn.textContent = "3. alerts";
+        answer4Btn.textContent = "4. numbers";
+      }
 
-var timeEl = document.querySelector(".time");
-var mainEl = document.getElementById("main");
+      if (
+        answer1Btn.click ||
+        answer2Btn.click ||
+        answer3Btn.click ||
+        answer4Btn.click
+      ) {
+        // Setting Second question Buttons to show and answer
+        //Set an attribute for the subtext
+         h2.textContent = questions[clicked];
+         h2.setAttribute("style", "font-size: 25px");
+        //Set the content attribute to the buttons
+        if (clicked === 1) {
+          answer1Btn.textContent = "1. quotes";
+          answer2Btn.textContent = "2. curly brackets";
+          answer3Btn.textContent = "3. parentheses";
+          answer4Btn.textContent = "4. square brackets";
+        }
+      }
+      //Setting up third question
+      if (
+        answer1Btn.click ||
+        answer2Btn.click ||
+        answer3Btn.click ||
+        answer4Btn.click
+      ) {
+        // Setting third question Buttons to show and answer
+        //Set an attribute for the subtext
+        h2.textContent = questions[clicked];
+        h2.setAttribute("style", "font-size: 25px");
+        //Set the content attribute to the buttons
+        if (clicked === 2) {
+          answer1Btn.textContent = "1. numbers and strings";
+          answer2Btn.textContent = "2. other arrays";
+          answer3Btn.textContent = "3. booleans";
+          answer4Btn.textContent = "4. all of the above";
+        }
+        //Setting up fourth question
+        if (
+          answer1Btn.click ||
+          answer2Btn.click ||
+          answer3Btn.click ||
+          answer4Btn.click
+        ) {
+          // Setting fourth question Buttons to show and answer
+          //Set an attribute for the subtext
+          h2.textContent = questions[clicked];
+          h2.setAttribute("style", "font-size: 25px");
+          //Set the content attribute to the buttons
+          if (clicked === 3) {
+            answer1Btn.textContent = "1. commas";
+            answer2Btn.textContent = "2. curly brankets";
+            answer3Btn.textContent = "3. quotes";
+            answer4Btn.textContent = "4. parentheses";
+          }
+          //Setting up fifth question
+          if (
+            answer1Btn.click ||
+            answer2Btn.click ||
+            answer3Btn.click ||
+            answer4Btn.click
+          ) {
+            // Setting fifth question Buttons to show and answer
+            //Set an attribute for the subtext
+            h2.textContent = questions[clicked];
+            h2.setAttribute("style", "font-size: 25px");
+            //Set the content attribute to the buttons
+            if (clicked === 4) {
+              answer1Btn.textContent = "1. JavaScript";
+              answer2Btn.textContent = "2. terminal / bash";
+              answer3Btn.textContent = "3. for loops";
+              answer4Btn.textContent = "4. console.log";
+            }
+          }
 
-var secondsLeft = 60;
-
-function setTime() {
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = "Time: " + secondsLeft;
-
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-      sendMessage();
+          if (clicked === 5) {
+            h1.textContent = "All Done!";
+            h2.textContent = "Your score is " + secondsLeft;
+            var secondsLeft = localStorage.getItem("secondsLeft");
+            //Hide button
+            answer1Btn.style.display = "none";
+            answer2Btn.style.display = "none";
+            answer3Btn.style.display = "none";
+            answer4Btn.style.display = "none";
+            //Time remaining
+          }
+        }
+      }
     }
-  }, 1000);
-}
+  }
 
-function sendMessage() {
-  timeEl.textContent = " ";
+  // Time function
 
-  var imgEl = document.createElement("img");
+  var timeEl = document.querySelector(".time");
 
-  imgEl.setAttribute("src", "images/image_1.jpg");
-  mainEl.appendChild(imgEl);
-}
+  var secondsLeft = 60;
 
-setTime();
+  function setTime() {
+    var timerInterval = setInterval(function () {
+      secondsLeft--;
+      timeEl.textContent = "Time: " + secondsLeft;
+
+      if (secondsLeft === 0 || clicked === 5) {
+        clearInterval(timerInterval);
+        sendMessage();
+      }
+    }, 1000);
+  }
+
+  function sendMessage() {
+    timeEl.textContent = " ";
+    if (secondsLeft === 0) {
+      h1.textContent = "Out of time!";
+      h2.textContent = "Yours score is " + secondsLeft;
+    }
+    if (clicked === 5) {
+      h1.textContent = "All Done!";
+      h2.textContent = "Yours score is " + secondsLeft;
+    }
+    //Label text and input hided unless time is over or game
+    if (clicked === 5 || secondsLeft === 0) {
+      answer1Btn.style.display = "none";
+      answer2Btn.style.display = "none";
+      answer3Btn.style.display = "none";
+      answer4Btn.style.display = "none";
+      initiallabel.style.display = "block";
+      initial.style.display = "block";
+     
+      
+    }
+  }
+
+  setTime();
+  return
 }
 
 //Creating a function to check answer

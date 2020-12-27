@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-3">
         <p class="time"></p>
-        <div id="main"></div>
+        
       </div>
     </div>
     <div class="row">
@@ -45,7 +45,13 @@
         <ul>
           <button id="start" class="btn btn-info">start Quiz</button>
           <button id="answer1" class="btn btn-info">answer1</button>
-
+          <form method="POST">
+            <div class="input-group">
+              <label id="initiallabel" for="initial">Enter initial</label>
+              <input type="text" name="initial" id="initial" placeholder="AB" />
+              <button id="submit" class="btn btn-info">submit</button>
+            </div>
+          </form>
         </ul>
       </div>
       <div class="col-md-3"></div>
