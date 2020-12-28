@@ -209,13 +209,13 @@ function startQuiz() {
       answer4Btn.style.display = "none";
       initiallabel.style.display = "block";
       initial.style.display = "block";
-     
-      
+      submitBtn.style.display = "block";
+      submitBtn.setAttribute("style", "align: center")
     }
   }
 
   setTime();
-  return
+  
 }
 
 //Creating a function to check answer
@@ -234,11 +234,4 @@ function checkAnswer() {
   //Question 1 answer
 }
 
-//Start quiz
-// First question display
 
-// Second question display
-
-// Third question display
-
-// Fourth question display
