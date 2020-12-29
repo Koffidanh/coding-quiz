@@ -23,11 +23,11 @@ var answer4Btn = document.getElementById("answer4");
 var submitBtn = document.getElementById("submit");
 var initial = localStorage.getItem("initial");
 // Add event listener to generate button to open prompts
-startBtn.addEventListener("click", startQuiz);
-answer1Btn.addEventListener("click", startQuiz);
-answer2Btn.addEventListener("click", startQuiz);
-answer3Btn.addEventListener("click", startQuiz);
-answer4Btn.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", startQuiz, checkAnswer);
+answer1Btn.addEventListener("click", startQuiz, checkAnswer);
+answer2Btn.addEventListener("click", startQuiz, checkAnswer);
+answer3Btn.addEventListener("click", startQuiz, checkAnswer);
+answer4Btn.addEventListener("click", startQuiz, checkAnswer);
 //Creating the Main page  title and subtext
 //Main title
 var h1 = document.querySelector("#text");
@@ -48,7 +48,7 @@ initiallabel.style.display = "none";
 initial.style.display = "none";
 //Variables
 var clicked = -1;
-
+var score = "";
 // StartQuiz function
 
 function startQuiz() {
@@ -91,8 +91,8 @@ function startQuiz() {
       ) {
         // Setting Second question Buttons to show and answer
         //Set an attribute for the subtext
-         h2.textContent = questions[clicked];
-         h2.setAttribute("style", "font-size: 25px");
+        h2.textContent = questions[clicked];
+        h2.setAttribute("style", "font-size: 25px");
         //Set the content attribute to the buttons
         if (clicked === 1) {
           answer1Btn.textContent = "1. quotes";
@@ -159,14 +159,14 @@ function startQuiz() {
 
           if (clicked === 5) {
             h1.textContent = "All Done!";
-            h2.textContent = "Your score is " + secondsLeft;
-            var secondsLeft = localStorage.getItem("secondsLeft");
+            score = secondsLeft;
+            h2.textContent = "Your score is " + score;
+            var score = localStorage.getItem("secondsLeft");
             //Hide button
             answer1Btn.style.display = "none";
             answer2Btn.style.display = "none";
             answer3Btn.style.display = "none";
             answer4Btn.style.display = "none";
-            //Time remaining
           }
         }
       }
@@ -176,10 +176,11 @@ function startQuiz() {
   // Time function
 
   var timeEl = document.querySelector(".time");
-
   var secondsLeft = 60;
+  
 
   function setTime() {
+    
     var timerInterval = setInterval(function () {
       secondsLeft--;
       timeEl.textContent = "Time: " + secondsLeft;
@@ -190,9 +191,10 @@ function startQuiz() {
       }
     }, 1000);
   }
-
+  setTime();
   function sendMessage() {
-    timeEl.textContent = " ";
+    
+    timeEl.textContent = "";
     if (secondsLeft === 0) {
       h1.textContent = "Out of time!";
       h2.textContent = "Yours score is " + secondsLeft;
@@ -210,28 +212,50 @@ function startQuiz() {
       initiallabel.style.display = "block";
       initial.style.display = "block";
       submitBtn.style.display = "block";
-      submitBtn.setAttribute("style", "align: center")
+      submitBtn.setAttribute("style", "align: center");
     }
   }
-
-  setTime();
-  
 }
 
 //Creating a function to check answer
 function checkAnswer() {
-  if ((h2.textContent = questions[0])) {
-    answer1Btn.click;
-    answer2Btn.click;
-    answer4Btn.click;
-    console.log("true");
-  } else {
-    answer3Btn.click;
-
-    console.log("False");
+  //Question 1 answer
+  if (clicked === 1 && answer1Btn.click === true ||
+    answer2Btn.click === true ||
+    answer4Btn.click === true){
+   
+    (timeEl.textContent -= 10), 1000;
+    //console.log("false");
   }
 
-  //Question 1 answer
+  //Question 2 answer
+  if (clicked === 2 && answer1Btn.click === true ||
+    answer2Btn.click === true ||
+    answer4Btn.click === true) {
+    (timeEl.textContent -= 10), 1000;
+    //console.log("false");
+  }
+
+  //Question 3 answer
+  if (clicked === 3 && answer1Btn.click === true ||
+    answer2Btn.click === true ||
+    answer3Btn.click === true) {
+    (timeEl.textContent -= 10), 1000;
+    //console.log("false");
+  }
+
+  //Question 4 answer
+  if (clicked === 4 && answer1Btn.click === true ||
+    answer2Btn.click === true ||
+    answer4Btn.click === true) {
+    (timeEl.textContent -= 10), 1000;
+    //console.log("false");
+  }
+  //Question 5 answer
+  if (clicked === 5 && answer1Btn.click === true ||
+    answer2Btn.click === true ||
+    answer3Btn.click === true) {
+    timeEl.textContent -= 10;
+    //console.log("false");
+  }
 }
-
-
