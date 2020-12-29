@@ -23,7 +23,7 @@ var answer4Btn = document.getElementById("answer4");
 var submitBtn = document.getElementById("submit");
 var initial = localStorage.getItem("initial");
 // Add event listener to generate button to open prompts
-startBtn.addEventListener("click", startQuiz, checkAnswer);
+startBtn.addEventListener("click", startQuiz, setTime);
 answer1Btn.addEventListener("click", startQuiz, checkAnswer);
 answer2Btn.addEventListener("click", startQuiz, checkAnswer);
 answer3Btn.addEventListener("click", startQuiz, checkAnswer);
@@ -38,6 +38,8 @@ h2.textContent =
   "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
 var initiallabel = document.querySelector("#initiallabel");
 var initial = document.querySelector("#initial");
+var answer = document.getElementById("answerCheck").textContent;
+
 //Hide button
 answer1Btn.style.display = "none";
 answer2Btn.style.display = "none";
@@ -46,12 +48,32 @@ answer4Btn.style.display = "none";
 submitBtn.style.display = "none";
 initiallabel.style.display = "none";
 initial.style.display = "none";
+
 //Variables
 var clicked = -1;
-var score = "";
+
 // StartQuiz function
 
+// Time function
+
+var timeEl = document.querySelector(".time");
+var secondsLeft = 60;
+
+function setTime() {
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = "";
+    timeEl.textContent = "Time: " + secondsLeft;
+
+    if (secondsLeft === 0 || clicked === 5) {
+      clearInterval(timerInterval);
+      quizOver();
+    }
+  }, 1000);
+}
+
 function startQuiz() {
+  setTime();
   //Creating questions function
   //Set an attribute for the subtext
 
@@ -160,8 +182,9 @@ function startQuiz() {
           if (clicked === 5) {
             h1.textContent = "All Done!";
             score = secondsLeft;
-            h2.textContent = "Your score is " + score;
-            var score = localStorage.getItem("secondsLeft");
+            h2.textContent = "Your score is " + secondsLeft;
+            var initial = localStorage.getItem("initiallabel", initial);
+            var score = localStorage.getItem("time", score);
             //Hide button
             answer1Btn.style.display = "none";
             answer2Btn.style.display = "none";
@@ -172,90 +195,87 @@ function startQuiz() {
       }
     }
   }
-
-  // Time function
-
-  var timeEl = document.querySelector(".time");
-  var secondsLeft = 60;
-  
-
-  function setTime() {
-    
-    var timerInterval = setInterval(function () {
-      secondsLeft--;
-      timeEl.textContent = "Time: " + secondsLeft;
-
-      if (secondsLeft === 0 || clicked === 5) {
-        clearInterval(timerInterval);
-        sendMessage();
-      }
-    }, 1000);
+}
+//Quiz over
+function quizOver() {
+  timeEl.textContent = "";
+  if (secondsLeft === 0) {
+    h1.textContent = "Out of time!";
+    h2.textContent = "Yours score is " + secondsLeft;
   }
-  setTime();
-  function sendMessage() {
-    
-    timeEl.textContent = "";
-    if (secondsLeft === 0) {
-      h1.textContent = "Out of time!";
-      h2.textContent = "Yours score is " + secondsLeft;
-    }
-    if (clicked === 5) {
-      h1.textContent = "All Done!";
-      h2.textContent = "Yours score is " + secondsLeft;
-    }
-    //Label text and input hided unless time is over or game
-    if (clicked === 5 || secondsLeft === 0) {
-      answer1Btn.style.display = "none";
-      answer2Btn.style.display = "none";
-      answer3Btn.style.display = "none";
-      answer4Btn.style.display = "none";
-      initiallabel.style.display = "block";
-      initial.style.display = "block";
-      submitBtn.style.display = "block";
-      submitBtn.setAttribute("style", "align: center");
-    }
+  if (clicked === 5) {
+    h1.textContent = "All Done!";
+    h2.textContent = "Yours score is " + secondsLeft;
+  }
+  //Label text and input hided unless time is over or game
+  if (clicked === 5 || secondsLeft === 0) {
+    answer1Btn.style.display = "none";
+    answer2Btn.style.display = "none";
+    answer3Btn.style.display = "none";
+    answer4Btn.style.display = "none";
+    initiallabel.style.display = "block";
+    initial.style.display = "block";
+    submitBtn.style.display = "block";
+    submitBtn.setAttribute("style", "align: center");
   }
 }
 
 //Creating a function to check answer
 function checkAnswer() {
   //Question 1 answer
-  if (clicked === 1 && answer1Btn.click === true ||
-    answer2Btn.click === true ||
-    answer4Btn.click === true){
-   
-    (timeEl.textContent -= 10), 1000;
+  if (clicked === 1 && answer1Btn.click ||
+    answer2Btn.click ||
+    answer4Btn.click ){
+    secondsLeft -= 10;
+    answer = "Incorrect";
     //console.log("false");
+    //console.log(score);
+  } else {
+    answer = "Correct";
   }
 
   //Question 2 answer
-  if (clicked === 2 && answer1Btn.click === true ||
-    answer2Btn.click === true ||
-    answer4Btn.click === true) {
-    (timeEl.textContent -= 10), 1000;
+  if (clicked === 2 && answer1Btn.click ||
+    answer2Btn.click ||
+    answer4Btn.click ){
+    secondsLeft -= 10;
+    answer = "Incorrect";
     //console.log("false");
+    //console.log(score);
+  } else {
+    answer = "Correct";
   }
 
   //Question 3 answer
-  if (clicked === 3 && answer1Btn.click === true ||
-    answer2Btn.click === true ||
-    answer3Btn.click === true) {
-    (timeEl.textContent -= 10), 1000;
-    //console.log("false");
+  if (clicked === 3 && answer1Btn.click ||
+    answer2Btn.click ||
+    answer3Btn.click ){
+    secondsLeft -= 10;
+    answer = "Incorrect";
+    // console.log("false");
+    //console.log(score);
+  } else {
+    answer = "Correct";
   }
 
   //Question 4 answer
-  if (clicked === 4 && answer1Btn.click === true ||
-    answer2Btn.click === true ||
-    answer4Btn.click === true) {
-    (timeEl.textContent -= 10), 1000;
-    //console.log("false");
+  if (clicked === 4 && answer1Btn.click ||
+    answer2Btn.click ||
+    answer4Btn.click ){
+    secondsLeft -= 10;
+    answer = "Incorrect";
+    // console.log("false");
+    //console.log(score);
+  } else {
+    answer = "Correct";
   }
   //Question 5 answer
-  if (clicked === 5 && answer1Btn.click === true ||
-    answer2Btn.click === true ||
-    answer3Btn.click === true) {
-    timeEl.textContent -= 10;
-    //console.log("false");
+  if (clicked === 5 && answer1Btn.click ||
+    answer2Btn.click ||
+    answer3Btn.click ){
+    secondsLeft -= 10;
+    answer = "Incorrect";
+  } else {
+    answer = "Correct";
   }
 }
