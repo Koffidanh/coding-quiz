@@ -22,14 +22,14 @@ var answer3Btn = document.getElementById("answer3");
 var answer4Btn = document.getElementById("answer4");
 var submitBtn = document.getElementById("submit");
 var highScore = document.getElementById("highScore");
-var initialInput = document.querySelector("#initial");
+var initial = document.querySelector("#initial");
 
 // Add event listener to generate button to open prompts
 startBtn.addEventListener("click", startQuiz, setTime);
-answer1Btn.addEventListener("click", startQuiz, checkAnswer, highScore);
-answer2Btn.addEventListener("click", startQuiz, checkAnswer, highScore);
-answer3Btn.addEventListener("click", startQuiz, checkAnswer, highScore);
-answer4Btn.addEventListener("click", startQuiz, checkAnswer, highScore);
+answer1Btn.addEventListener("click", startQuiz, checkAnswer);
+answer2Btn.addEventListener("click", startQuiz, checkAnswer);
+answer3Btn.addEventListener("click", startQuiz, checkAnswer);
+answer4Btn.addEventListener("click", startQuiz, checkAnswer);
 submitBtn.addEventListener("click", highScore);
 //Creating the Main page  title and subtext
 //Main title
@@ -41,7 +41,7 @@ h2.textContent =
   "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
 var initiallabel = document.querySelector("#initiallabel");
 var initial = document.querySelector("#initial");
-var answer = document.getElementById("answerCheck").textContent;
+var answer = document.getElementById("answerCheck");
 
 //Hide button
 answer1Btn.style.display = "none";
@@ -66,10 +66,8 @@ function setTime() {
 
   var timerInterval = setInterval(function () {
     secondsLeft--;
-
-
     timeEl.textContent = "Time: " + secondsLeft;
-    checkAnswer()
+
     if (secondsLeft === 0 || clicked === 5) {
       clearInterval(timerInterval);
       quizOver();
@@ -77,8 +75,10 @@ function setTime() {
     }
   }, 1000);
 
-
 }
+
+
+
 
 //Creating a function to check answer
 function checkAnswer() {
@@ -86,7 +86,7 @@ function checkAnswer() {
   if (clicked === 0 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    // secondsLeft -= 10;
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //console.log("incorrect")
 
@@ -99,7 +99,7 @@ function checkAnswer() {
   if (clicked === 1 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    // secondsLeft -= 10;
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //console.log("incorrect")
 
@@ -112,7 +112,7 @@ function checkAnswer() {
   if (clicked === 2 && answer1Btn.click ||
     answer2Btn.click ||
     answer3Btn.click) {
-    // secondsLeft -= 10;
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     // console.log("incorrect")
 
@@ -125,7 +125,7 @@ function checkAnswer() {
   if (clicked === 3 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    //  secondsLeft -= 10;
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     // console.log("incorrect")
 
@@ -137,7 +137,7 @@ function checkAnswer() {
   if (clicked === 4 && answer1Btn.click ||
     answer2Btn.click ||
     answer3Btn.click) {
-    // secondsLeft -= 10;
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //  console.log("incorrect")
   } else {
@@ -147,7 +147,9 @@ function checkAnswer() {
 
 }
 
+
 function startQuiz() {
+  checkAnswer()
   setTime();
   //Creating questions function
   //Set an attribute for the subtext
@@ -299,20 +301,21 @@ function quizOver() {
 
 //highscore function
 function highScore() {
+
   var initial = localStorage.setItem("initial", initial);
   var secondsLeft = localStorage.setItem("time", secondsLeft);
 
-  if (submitBtn.click === true) {
-    var h1 = document.querySelector("#text");
-    h1.textContent = "Highscores";
 
-    console.log(initial);
-    console.log(secondsLeft);
-    document.getElementById("initial").innert = localStorage.getItem("initial");
-    document.getElementsByClassName("time").innerHTML = localStorage.getItem("secondsLeft");
-    localStorage.getItem("time", secondsLeft);
-    highScore();
-  }
+  var h1 = document.querySelector("#text");
+  h1.textContent = "Highscores";
+
+  // console.log(initial);
+  // console.log(secondsLeft);
+  document.getElementById("initial").innert = localStorage.getItem("initial");
+  document.getElementsByClassName("time").innerHTML = localStorage.getItem("secondsLeft");
+  localStorage.getItem("time", secondsLeft);
+
+
 
 
 }
