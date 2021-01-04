@@ -21,6 +21,8 @@ var answer2Btn = document.getElementById("answer2");
 var answer3Btn = document.getElementById("answer3");
 var answer4Btn = document.getElementById("answer4");
 var submitBtn = document.getElementById("submit");
+// var goBackBtn = document.getElementById("goBack");
+// var clearBtn = document.getElementById("clear");
 var highScore = document.getElementById("highScore");
 var initial = document.querySelector("#initial");
 
@@ -30,7 +32,9 @@ answer1Btn.addEventListener("click", startQuiz, checkAnswer);
 answer2Btn.addEventListener("click", startQuiz, checkAnswer);
 answer3Btn.addEventListener("click", startQuiz, checkAnswer);
 answer4Btn.addEventListener("click", startQuiz, checkAnswer);
-submitBtn.addEventListener("click", highScore);
+// goBackBtn.addEventListener("click", startQuiz, checkAnswer);
+// clearBtn.addEventListener("click", startQuiz, checkAnswer);
+
 //Creating the Main page  title and subtext
 //Main title
 var h1 = document.querySelector("#text");
@@ -54,39 +58,17 @@ initial.style.display = "none";
 
 //Variables
 var clicked = -1;
-
+var score = secondsLeft;
 // StartQuiz function
-
-// Time function
-
-var timeEl = document.querySelector(".time");
-var secondsLeft = 50;
-
-function setTime() {
-
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = "Time: " + secondsLeft;
-
-    if (secondsLeft === 0 || clicked === 5) {
-      clearInterval(timerInterval);
-      quizOver();
-
-    }
-  }, 1000);
-
-}
-
-
-
 
 //Creating a function to check answer
 function checkAnswer() {
+
   //Question 1 answer
   if (clicked === 0 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    secondsLeft -= 10;
+    score -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //console.log("incorrect")
 
@@ -99,7 +81,7 @@ function checkAnswer() {
   if (clicked === 1 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    secondsLeft -= 10;
+    score -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //console.log("incorrect")
 
@@ -112,7 +94,7 @@ function checkAnswer() {
   if (clicked === 2 && answer1Btn.click ||
     answer2Btn.click ||
     answer3Btn.click) {
-    secondsLeft -= 10;
+    score -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     // console.log("incorrect")
 
@@ -125,7 +107,7 @@ function checkAnswer() {
   if (clicked === 3 && answer1Btn.click ||
     answer2Btn.click ||
     answer4Btn.click) {
-    secondsLeft -= 10;
+    score -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     // console.log("incorrect")
 
@@ -137,7 +119,7 @@ function checkAnswer() {
   if (clicked === 4 && answer1Btn.click ||
     answer2Btn.click ||
     answer3Btn.click) {
-    secondsLeft -= 10;
+    score -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
     //  console.log("incorrect")
   } else {
@@ -146,6 +128,32 @@ function checkAnswer() {
   }
 
 }
+
+
+// Time function
+
+var timeEl = document.querySelector(".time");
+var secondsLeft = 50;
+
+function setTime() {
+
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = "Time: " + secondsLeft;
+
+    if (secondsLeft === 0 || clicked === 5 || score === 0) {
+      clearInterval(timerInterval);
+      quizOver();
+
+    }
+  }, 1000);
+
+}
+
+
+
+
+
 
 
 function startQuiz() {
@@ -300,22 +308,36 @@ function quizOver() {
 
 
 //highscore function
-function highScore() {
-
-  var initial = localStorage.setItem("initial", initial);
-  var secondsLeft = localStorage.setItem("time", secondsLeft);
-
-
+submitBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  
+ var initial = localStorage.setItem("initial", initial);
+ var score = localStorage.setItem("time", score);
   var h1 = document.querySelector("#text");
-  h1.textContent = "Highscores";
+  var initiallabel = document.querySelector("#initiallabel");
+  var initial = document.querySelector("#initial");
 
+  if (initial === "") {
+    displayMessage("error", "Initial cannot be blank");
+  } else {
+    //Hide this attributes
+    initiallabel.style.display = "none";
+    initial.style.display = "none";
+    submitBtn.style.display = "none";
+  }
   // console.log(initial);
   // console.log(secondsLeft);
-  document.getElementById("initial").innert = localStorage.getItem("initial");
-  document.getElementsByClassName("time").innerHTML = localStorage.getItem("secondsLeft");
-  localStorage.getItem("time", secondsLeft);
+  localStorage.getItem("initial", initial);
+  localStorage.getItem("time", score);
+  h1.textContent = "Highscores";
+  h2.textContent = initial.value + " - " + score;
+
+});
 
 
 
 
-}
+
+
+
+

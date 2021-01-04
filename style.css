@@ -29,6 +29,7 @@ form {
   margin: auto;  
   
 }
-#answerCheck {
-    transition: 1s;
+.container {
+  align-items: center;
+justify-content: center;
 }
