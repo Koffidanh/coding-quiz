@@ -310,9 +310,9 @@ function quizOver() {
 //highscore function
 submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  
- var initial = localStorage.setItem("initial", initial);
- var score = localStorage.setItem("time", score);
+
+  localStorage.setItem("initial", initial);
+  localStorage.setItem("time", score);
   var h1 = document.querySelector("#text");
   var initiallabel = document.querySelector("#initiallabel");
   var initial = document.querySelector("#initial");
@@ -328,12 +328,13 @@ submitBtn.addEventListener("click", function (event) {
   // console.log(initial);
   // console.log(secondsLeft);
   localStorage.getItem("initial", initial);
-  localStorage.getItem("time", score);
+  var score = localStorage.getItem("time", score);
   h1.textContent = "Highscores";
   h2.textContent = initial.value + " - " + score;
 
 });
 
+// Highscore html
 
 
 
