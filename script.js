@@ -355,7 +355,7 @@ submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
 
   localStorage.setItem("initial", initial);
-  localStorage.setItem("time", score);
+  localStorage.setItem("time", secondsLeft);
   var h1 = document.querySelector("#text");
   var initiallabel = document.querySelector("#initiallabel");
   var initial = document.querySelector("#initial");
@@ -370,10 +370,12 @@ submitBtn.addEventListener("click", function (event) {
   }
   // console.log(initial);
   // console.log(secondsLeft);
-  localStorage.getItem("initial", initial);
-  var score = localStorage.getItem("time", score);
+  var initial = document.getElementById('initial').value;
+  localStorage.setItem("initial", JSON.stringify(initial));
+  JSON.parse(localStorage.getItem("time", secondsLeft)) || [];
+  localStorage.setItem('highScore',JSON.stringify(initial))
   h1.textContent = "Highscores";
-  h2.textContent = initial.value + " - " + score;
+  h2.textContent = initial + " - " + secondsLeft;
 
 });
 
