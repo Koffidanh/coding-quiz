@@ -11,7 +11,7 @@ var answers = [
   "parentheses",
   "all of the above",
   "quotes",
-  "console log",
+  "console.log",
 ];
 // Start button to start the quiz
 // Assignment Code
@@ -21,19 +21,21 @@ var answer2Btn = document.getElementById("answer2");
 var answer3Btn = document.getElementById("answer3");
 var answer4Btn = document.getElementById("answer4");
 var submitBtn = document.getElementById("submit");
-// var goBackBtn = document.getElementById("goBack");
-// var clearBtn = document.getElementById("clear");
+var quizQuestions = document.getElementById('quizQuestions');
+var goBackBtn = document.getElementById("goBack");
+var clearBtn = document.getElementById("clear");
 var highScore = document.getElementById("highScore");
 var initial = document.querySelector("#initial");
 
 // Add event listener to generate button to open prompts
-startBtn.addEventListener("click", startQuiz, setTime);
-answer1Btn.addEventListener("click", startQuiz, checkAnswer);
-answer2Btn.addEventListener("click", startQuiz, checkAnswer);
-answer3Btn.addEventListener("click", startQuiz, checkAnswer);
-answer4Btn.addEventListener("click", startQuiz, checkAnswer);
-// goBackBtn.addEventListener("click", startQuiz, checkAnswer);
-// clearBtn.addEventListener("click", startQuiz, checkAnswer);
+startBtn.addEventListener("click", startQuiz);
+answer1Btn.addEventListener("click", checkAnswer);
+answer2Btn.addEventListener("click", checkAnswer);
+answer3Btn.addEventListener("click", checkAnswer);
+answer4Btn.addEventListener("click", checkAnswer);
+// goBackBtn.addEventListener("click");
+// clearBtn.addEventListener("click");
+
 
 //Creating the Main page  title and subtext
 //Main title
@@ -57,77 +59,96 @@ initiallabel.style.display = "none";
 initial.style.display = "none";
 
 //Variables
-var clicked = -1;
-var score = secondsLeft;
-// StartQuiz function
+var clicked = 0;
+
+
+//Answercheck text to appear for a certain millisecond before disapearing
+function appear(event) {
+  document.getElementById("answerCheck").style.transition = "all 0.2s";
+}
 
 //Creating a function to check answer
-function checkAnswer() {
+function checkAnswer(event) {
+  //console.log(this)
+  //console.log(event.target.value)
+  //Change color of the answercheck green for corect and red for incorrect
+  if (event.target.value == answers[clicked]) {
+    document.getElementById("answerCheck").style.color = "green";
+  } else {
+    document.getElementById("answerCheck").style.color = "red";
+  }
 
   //Question 1 answer
-  if (clicked === 0 && answer1Btn.click ||
-    answer2Btn.click ||
-    answer4Btn.click) {
-    score -= 10;
+  if (clicked === 0 && event.target.value !== answers[clicked]) {
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
-    //console.log("incorrect")
-
-  } else {
-    //console.log("correct")
+    clicked++
+    nextQuestion();
+    return;
+  } else if (clicked === 0 && event.target.value == answers[clicked]) {
+    clicked++
+    nextQuestion();
     document.getElementById("answerCheck").textContent = "Correct";
+    return;
   }
 
   //Question 2 answer
-  if (clicked === 1 && answer1Btn.click ||
-    answer2Btn.click ||
-    answer4Btn.click) {
-    score -= 10;
+  if (clicked === 1 && event.target.value !== answers[clicked]) {
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
-    //console.log("incorrect")
-
-  } else {
-    //console.log("correct")
+    clicked++
+    nextQuestion();
+    return;
+  } else if (clicked === 1 && event.target.value == answers[clicked]) {
+    clicked++
+    nextQuestion();
     document.getElementById("answerCheck").textContent = "Correct";
+    return;
   }
 
   //Question 3 answer
-  if (clicked === 2 && answer1Btn.click ||
-    answer2Btn.click ||
-    answer3Btn.click) {
-    score -= 10;
+  if (clicked === 2 && event.target.value !== answers[clicked]) {
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
-    // console.log("incorrect")
-
-  } else {
-    // console.log("correct")
+    clicked++
+    nextQuestion();
+    return;
+  } else if (clicked === 2 && event.target.value == answers[clicked]) {
+    clicked++
+    nextQuestion();
     document.getElementById("answerCheck").textContent = "Correct";
+    return;
   }
 
   //Question 4 answer
-  if (clicked === 3 && answer1Btn.click ||
-    answer2Btn.click ||
-    answer4Btn.click) {
-    score -= 10;
+  if (clicked === 3 && event.target.value !== answers[clicked]) {
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
-    // console.log("incorrect")
-
-  } else {
-    // console.log("correct")
+    clicked++
+    nextQuestion();
+    return;
+  } else if (clicked === 3 && event.target.value == answers[clicked]) {
+    clicked++
+    nextQuestion();
     document.getElementById("answerCheck").textContent = "Correct";
+    return;
   }
   //Question 5 answer
-  if (clicked === 4 && answer1Btn.click ||
-    answer2Btn.click ||
-    answer3Btn.click) {
-    score -= 10;
+  if (clicked === 4 && event.target.value !== answers[clicked]) {
+    secondsLeft -= 10;
     document.getElementById("answerCheck").textContent = "Incorrect";
-    //  console.log("incorrect")
-  } else {
-    //  console.log("correct")
+    clicked++
+    nextQuestion();
+    return;
+  } else if (clicked === 4 && event.target.value == answers[clicked]) {
+    clicked++
+    nextQuestion();
     document.getElementById("answerCheck").textContent = "Correct";
+    return;
+
   }
 
-}
+};
 
 
 // Time function
@@ -141,7 +162,7 @@ function setTime() {
     secondsLeft--;
     timeEl.textContent = "Time: " + secondsLeft;
 
-    if (secondsLeft === 0 || clicked === 5 || score === 0) {
+    if (secondsLeft === 0 || clicked === 5) {
       clearInterval(timerInterval);
       quizOver();
 
@@ -149,19 +170,8 @@ function setTime() {
   }, 1000);
 
 }
-
-
-
-
-
-
-
-function startQuiz() {
-  checkAnswer()
-  setTime();
-  //Creating questions function
-  //Set an attribute for the subtext
-
+// nextQuestion function
+function nextQuestion() {
   if (!startBtn.click) {
     answer1Btn.style.display = "none";
     answer2Btn.style.display = "none";
@@ -178,16 +188,20 @@ function startQuiz() {
     // Hide the start button
     startBtn.style.display = "none";
     if (clicked < questions.length) {
-      h2.textContent = questions[clicked + 1];
-      clicked++;
+      h2.textContent = questions[clicked];
+
       h2.setAttribute("style", "font-size: 25px");
 
       //Set the content attribute to the buttons
       if (clicked === 0) {
         answer1Btn.textContent = "1. strings";
+        answer1Btn.value = "strings";
         answer2Btn.textContent = "2. booleans";
+        answer2Btn.value = "booleans";
         answer3Btn.textContent = "3. alerts";
+        answer3Btn.value = "alerts";
         answer4Btn.textContent = "4. numbers";
+        answer4Btn.valu = "numbers";
       }
 
       if (
@@ -203,9 +217,13 @@ function startQuiz() {
         //Set the content attribute to the buttons
         if (clicked === 1) {
           answer1Btn.textContent = "1. quotes";
+          answer1Btn.value = "quotes";
           answer2Btn.textContent = "2. curly brackets";
+          answer2Btn.value = "curly brackets";
           answer3Btn.textContent = "3. parentheses";
+          answer3Btn.value = "parentheses";
           answer4Btn.textContent = "4. square brackets";
+          answer4Btn.value = "square brackets";
         }
       }
       //Setting up third question
@@ -222,9 +240,13 @@ function startQuiz() {
         //Set the content attribute to the buttons
         if (clicked === 2) {
           answer1Btn.textContent = "1. numbers and strings";
+          answer1Btn.value = "numbers and strings";
           answer2Btn.textContent = "2. other arrays";
+          answer2Btn.value = "other arrays";
           answer3Btn.textContent = "3. booleans";
+          answer3Btn.value = "booleans";
           answer4Btn.textContent = "4. all of the above";
+          answer4Btn.value = "all of the above";
         }
         //Setting up fourth question
         if (
@@ -240,9 +262,13 @@ function startQuiz() {
           //Set the content attribute to the buttons
           if (clicked === 3) {
             answer1Btn.textContent = "1. commas";
+            answer1Btn.value = "commas";
             answer2Btn.textContent = "2. curly brankets";
+            answer2Btn.value = "curly brankets";
             answer3Btn.textContent = "3. quotes";
+            answer3Btn.value = "quotes";
             answer4Btn.textContent = "4. parentheses";
+            answer4Btn.value = "parentheses";
           }
           //Setting up fifth question
           if (
@@ -258,9 +284,13 @@ function startQuiz() {
             //Set the content attribute to the buttons
             if (clicked === 4) {
               answer1Btn.textContent = "1. JavaScript";
+              answer1Btn.value = "JavaScript";
               answer2Btn.textContent = "2. terminal / bash";
+              answer2Btn.value = "terminal / bash";
               answer3Btn.textContent = "3. for loops";
+              answer3Btn.value = "for loops";
               answer4Btn.textContent = "4. console.log";
+              answer4Btn.value = "console.log";
             }
           }
 
@@ -278,14 +308,27 @@ function startQuiz() {
       }
     }
   }
+};
 
-}
+function startQuiz() {
+  setTime();
+  //Creating questions function
+  //Set an attribute for the subtext
+  nextQuestion()
+};
+
 //Quiz over
 function quizOver() {
   timeEl.textContent = "";
   if (secondsLeft === 0) {
     h1.textContent = "Out of time!";
     h2.textContent = "Yours score is " + secondsLeft;
+  }
+  if (clicked === 5 && secondsLeft < 0) {
+    secondsLeft = 0;
+    h1.textContent = "All Done!";
+    h2.textContent = "Yours score is " + secondsLeft;
+
   }
   if (clicked === 5) {
     h1.textContent = "All Done!";
@@ -334,11 +377,5 @@ submitBtn.addEventListener("click", function (event) {
 
 });
 
+
 // Highscore html
-
-
-
-
-
-
-

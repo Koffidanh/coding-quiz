@@ -39,19 +39,33 @@
       <div class="col-md-3"></div>
     </div>
 
+    <div class="row"  >
+      <form method="POST" >
+        <div class="input-group"  >
+          <div class="col-md-3">
+            <label id="initiallabel" for="initial">Enter initial</label>
+          </div>
+          <div class="col-md-3" >
+            <input type="text" name="initial" id="initial" placeholder="AB" />
+          </div>
+          <div class="col-md-3" >
+              <button id="submit" class="btn btn-info">submit</button>
+          </div>
+          <div class="col-md-3"></div>
+          
+        </div>
+      </form>
+      
+    </div>
+
+    
+    <div id="quizQuestions">
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <ul>
           <button id="start" class="btn btn-info">start Quiz</button>
           <button id="answer1" class="btn btn-info">answer1</button>
-          <form method="POST">
-            <div class="input-group">
-              <label id="initiallabel" for="initial">Enter initial</label>
-              <input type="text" name="initial" id="initial" placeholder="AB" />
-              <button id="submit" class="btn btn-info">submit</button>
-            </div>
-          </form>
         </ul>
       </div>
       <div class="col-md-3"></div>
@@ -89,7 +103,8 @@
       </div>
       <div class="col-md-3"></div>
     </div>
-
+  </div>
+  
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6" id="answerCheck"></div>
