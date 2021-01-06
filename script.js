@@ -24,7 +24,9 @@ var submitBtn = document.getElementById("submit");
 var quizQuestions = document.getElementById('quizQuestions');
 var goBackBtn = document.getElementById("goBack");
 var clearBtn = document.getElementById("clear");
-var highScore = document.getElementById("highScore");
+var highScorePgBtn = document.getElementById("highScorePg");
+var HighscoresInitial = document.getElementById("HighscoresInitial");
+var HighscoresScore = document.getElementById("HighscoresScore");
 var initial = document.querySelector("#initial");
 
 // Add event listener to generate button to open prompts
@@ -33,9 +35,9 @@ answer1Btn.addEventListener("click", checkAnswer);
 answer2Btn.addEventListener("click", checkAnswer);
 answer3Btn.addEventListener("click", checkAnswer);
 answer4Btn.addEventListener("click", checkAnswer);
-// goBackBtn.addEventListener("click");
-// clearBtn.addEventListener("click");
-
+goBackBtn.addEventListener("click", goBack);
+clearBtn.addEventListener("click", clear);
+highScorePgBtn.addEventListener("click", highScorePg)
 
 //Creating the Main page  title and subtext
 //Main title
@@ -55,9 +57,12 @@ answer2Btn.style.display = "none";
 answer3Btn.style.display = "none";
 answer4Btn.style.display = "none";
 submitBtn.style.display = "none";
+goBackBtn.style.display = "none";
+clearBtn.style.display = "none";
 initiallabel.style.display = "none";
 initial.style.display = "none";
-
+HighscoresInitial.style.display = "none";
+HighscoresScore.style.display = "none";
 //Variables
 var clicked = 0;
 
@@ -321,16 +326,19 @@ function startQuiz() {
 function quizOver() {
   timeEl.textContent = "";
   if (secondsLeft === 0) {
+    document.getElementById("answerCheck").textContent = "";
     h1.textContent = "Out of time!";
     h2.textContent = "Yours score is " + secondsLeft;
   }
   if (clicked === 5 && secondsLeft < 0) {
     secondsLeft = 0;
+    document.getElementById("answerCheck").textContent = "";
     h1.textContent = "All Done!";
     h2.textContent = "Yours score is " + secondsLeft;
 
   }
   if (clicked === 5) {
+    document.getElementById("answerCheck").textContent = "";
     h1.textContent = "All Done!";
     h2.textContent = "Yours score is " + secondsLeft;
 
@@ -353,7 +361,7 @@ function quizOver() {
 //highscore function
 submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
-
+  document.getElementById("answerCheck").textContent = "";
   localStorage.setItem("initial", initial);
   localStorage.setItem("time", secondsLeft);
   var h1 = document.querySelector("#text");
@@ -373,11 +381,17 @@ submitBtn.addEventListener("click", function (event) {
   var initial = document.getElementById('initial').value;
   localStorage.setItem("initial", JSON.stringify(initial));
   JSON.parse(localStorage.getItem("time", secondsLeft)) || [];
-  localStorage.setItem('highScore',JSON.stringify(initial))
+  localStorage.setItem('highScore', JSON.stringify(initial))
   h1.textContent = "Highscores";
   h2.textContent = initial + " - " + secondsLeft;
 
 });
-
-
-// Highscore html
+// Highscore button
+highScorePgBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  startBtn.style.display = "none";
+  
+  h1.textContent = "Highscores";
+  h2.textContent = "Initials - Scores";
+  HighscoresInitial.prepend("<br>" + JSON.stringify(initial));
+});
