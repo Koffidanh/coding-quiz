@@ -29,7 +29,9 @@ var highScorePgBtn = document.getElementById("highScorePg");
 var HighscoresInitial = document.getElementById("HighscoresInitial");
 var HighscoresScore = document.getElementById("HighscoresScore");
 var initial = document.querySelector("#initial");
-
+var initiallabel = document.querySelector("#initiallabel");
+var initial = document.querySelector("#initial");
+var answer = document.getElementById("answerCheck");
 // Add event listener to generate button to open prompts
 startBtn.addEventListener("click", startQuiz);
 answer1Btn.addEventListener("click", checkAnswer);
@@ -48,9 +50,7 @@ h1.textContent = "Coding Quiz Challenge";
 var h2 = document.querySelector("#subtext");
 h2.textContent =
   "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
-var initiallabel = document.querySelector("#initiallabel");
-var initial = document.querySelector("#initial");
-var answer = document.getElementById("answerCheck");
+
 
 //Hide button
 answer1Btn.style.display = "none";
@@ -390,14 +390,37 @@ submitBtn.addEventListener("click", function (event) {
 // Highscore button
 highScorePgBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  //Hide the start button
   startBtn.style.display = "none";
+  //Create the main texts 
   h1.textContent = "Highscores";
   h2.textContent = "Initials - Scores";
- 
+  //Append  h2 to store initial and score in highscores page
+  var body = document.body;
+  var h3 = document.createElement("h3");
+  h3.textContent = JSON.stringify(initial) + " -------- " + JSON.parse(localStorage.getItem("time", secondsLeft));
   
+  //Goback and clear button to show
   goBackBtn.style.display = "block";
   clearBtn.style.display = "block";
 });
 // Go back function
-
+goBackBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+//Main title
+var h1 = document.querySelector("#text");
+h1.textContent = "Coding Quiz Challenge";
+//Subtext
+var h2 = document.querySelector("#subtext");
+h2.textContent =
+  "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+  // Show the start button
+  startBtn.style.display = "block";
+  goBackBtn.style.display = "none";
+  clearBtn.style.display = "none";
+});
 // Clear function
+clearBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  localStorage.clear();
+});
