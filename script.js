@@ -6,6 +6,7 @@ var questions = [
   "String values must be enclosed within _________ when being assigned to variables.",
   "A very useful tool used during development and debugging for printing content to the debugger is:",
 ];
+//Create answers
 var answers = [
   "alerts",
   "parentheses",
@@ -390,8 +391,13 @@ submitBtn.addEventListener("click", function (event) {
 highScorePgBtn.addEventListener("click", function (event) {
   event.preventDefault();
   startBtn.style.display = "none";
-  
   h1.textContent = "Highscores";
   h2.textContent = "Initials - Scores";
-  HighscoresInitial.prepend("<br>" + JSON.stringify(initial));
+ 
+  
+  goBackBtn.style.display = "block";
+  clearBtn.style.display = "block";
 });
+// Go back function
+
+// Clear function
