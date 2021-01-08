@@ -70,7 +70,7 @@ var clicked = 0;
 
 //Creating a function to check answer
 function checkAnswer(event) {
-  
+
   //console.log(this)
   //console.log(event.target.value)
   //Change color of the answercheck green for corect and red for incorrect
@@ -388,15 +388,14 @@ highScorePgBtn.addEventListener("click", function (event) {
   //Create the main texts 
   h1.textContent = "Highscores";
   h2.textContent = "Initials - Scores";
-  //Append  h2 to store initial and score in highscores page
- 
+  //Targetting  h3 to store initial and score in highscores page
   h3.textContent = JSON.parse(localStorage.getItem("initial", initial)) + " -------- " + JSON.parse(localStorage.getItem("time", secondsLeft));
   //Goback and clear button to show
   goBackBtn.style.display = "block";
   clearBtn.style.display = "block";
   storetext.style.display = "block";
-}); 
- 
+});
+
 // Go back function
 goBackBtn.addEventListener("click", function (event) {
   event.preventDefault();
