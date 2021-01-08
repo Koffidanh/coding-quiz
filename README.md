@@ -4,7 +4,7 @@ This quiz is developed to present five questions through a loop showing a questi
 The grading for this quiz is based on time remaining after the quiz is completed. The user loose 10 second from the timer which is set to 50 second each time the user picks a wrong answer.
 At the end of the quiz, the user is required to enter their initial be stored the result.
 The result could be viewed from the " View Highscores" button at the top left corner of the web.[Web Development Quiz](https://koffidanh.github.io/coding-quiz/)
-The Web Development Quiz consists of the Main page, Questions/Answers pages, Result page and View Highscores page.
+### The Web Development Quiz consists of the Main page, Questions/Answers pages, Result page and View Highscores page.
 
 ##  Main page
 The main page is the start of the quiz. It shows the main text "Coding Quiz Challenge" which tells the user the quiz name. This main text also shows on the questions page. The next text on this page is the subtext " Try to answer ... by ten second! " which tells the user the quiz steps and rules. The other stuffs on this page is the "View Highscores" button and "Start Quiz" button. The " View Highscores " button bring the user to view their preview score. And in the "View Highscore" button, the user can view their preview score and clear it. 
