@@ -19,7 +19,10 @@ button {
   font-size: 20px;
   text-align: center;
 }
+#storetext {
 
+  text-align: center;
+}
 #initial {
   width: 100%;
 }
@@ -50,10 +53,7 @@ form {
 #highScorePg:hover{
   background-color: teal;
 }
-#highScorePg:active{
-  border: block;
-  background-color: teal;
-}
+
 .HighscoresInitial {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 20px;
@@ -70,3 +70,9 @@ form {
   font-size: 25px;
   font-weight: bolder;
  }
+ #clear , #goBack {
+   align-content: center;
+   margin: auto;
+ }
+ 
+  

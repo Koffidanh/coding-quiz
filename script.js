@@ -32,6 +32,7 @@ var initial = document.querySelector("#initial");
 var initiallabel = document.querySelector("#initiallabel");
 var initial = document.querySelector("#initial");
 var answer = document.getElementById("answerCheck");
+var h3 = document.querySelector("#storetext");
 // Add event listener to generate button to open prompts
 startBtn.addEventListener("click", startQuiz);
 answer1Btn.addEventListener("click", checkAnswer);
@@ -52,7 +53,7 @@ h2.textContent =
   "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
 
 
-//Hide button
+//Hide button and texts
 answer1Btn.style.display = "none";
 answer2Btn.style.display = "none";
 answer3Btn.style.display = "none";
@@ -64,17 +65,17 @@ initiallabel.style.display = "none";
 initial.style.display = "none";
 HighscoresInitial.style.display = "none";
 HighscoresScore.style.display = "none";
+storetext.style.display = "none";
 //Variables
 var clicked = 0;
 
 
-//Answercheck text to appear for a certain millisecond before disapearing
-function appear(event) {
-  document.getElementById("answerCheck").style.transition = "all 0.2s";
-}
+
+
 
 //Creating a function to check answer
 function checkAnswer(event) {
+  
   //console.log(this)
   //console.log(event.target.value)
   //Change color of the answercheck green for corect and red for incorrect
@@ -369,8 +370,8 @@ submitBtn.addEventListener("click", function (event) {
   var initiallabel = document.querySelector("#initiallabel");
   var initial = document.querySelector("#initial");
 
-  if (initial === "") {
-    displayMessage("error", "Initial cannot be blank");
+  if (initial.value === "") {
+    alert("error: Initial cannot be blank");
   } else {
     //Hide this attributes
     initiallabel.style.display = "none";
@@ -384,10 +385,10 @@ submitBtn.addEventListener("click", function (event) {
   JSON.parse(localStorage.getItem("time", secondsLeft)) || [];
   localStorage.setItem('highScore', JSON.stringify(initial))
   h1.textContent = "Highscores";
-  h2.textContent = initial + " - " + secondsLeft;
+  h2.textContent = initial + " ----- " + secondsLeft;
 
 });
-// Highscore button
+// Highscores 
 highScorePgBtn.addEventListener("click", function (event) {
   event.preventDefault();
   //Hide the start button
@@ -396,31 +397,32 @@ highScorePgBtn.addEventListener("click", function (event) {
   h1.textContent = "Highscores";
   h2.textContent = "Initials - Scores";
   //Append  h2 to store initial and score in highscores page
-  var body = document.body;
-  var h3 = document.createElement("h3");
-  h3.textContent = JSON.stringify(initial) + " -------- " + JSON.parse(localStorage.getItem("time", secondsLeft));
-  
+ 
+  h3.textContent = JSON.parse(localStorage.getItem("initial", initial)) + " -------- " + JSON.parse(localStorage.getItem("time", secondsLeft));
   //Goback and clear button to show
   goBackBtn.style.display = "block";
   clearBtn.style.display = "block";
-});
+  storetext.style.display = "block";
+}); 
+ 
 // Go back function
 goBackBtn.addEventListener("click", function (event) {
   event.preventDefault();
-//Main title
-var h1 = document.querySelector("#text");
-h1.textContent = "Coding Quiz Challenge";
-//Subtext
-var h2 = document.querySelector("#subtext");
-h2.textContent =
-  "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+  //Main title
+  var h1 = document.querySelector("#text");
+  h1.textContent = "Coding Quiz Challenge";
+  //Subtext
+  var h2 = document.querySelector("#subtext");
+  h2.textContent =
+    "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
   // Show the start button
   startBtn.style.display = "block";
   goBackBtn.style.display = "none";
   clearBtn.style.display = "none";
+  storetext.style.display = "none";
 });
 // Clear function
 clearBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  localStorage.clear();
+  h3.remove();
 });
