@@ -411,7 +411,7 @@ goBackBtn.addEventListener("click", function (event) {
   startBtn.style.display = "block";
   goBackBtn.style.display = "none";
   clearBtn.style.display = "none";
-  storetext.style.display = "none";
+  h3.style.display = "none";
 });
 // Clear function
 clearBtn.addEventListener("click", function (event) {
