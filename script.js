@@ -52,7 +52,6 @@ var h2 = document.querySelector("#subtext");
 h2.textContent =
   "Try to answer the following code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
 
-
 //Hide button and texts
 answer1Btn.style.display = "none";
 answer2Btn.style.display = "none";
@@ -68,10 +67,6 @@ HighscoresScore.style.display = "none";
 storetext.style.display = "none";
 //Variables
 var clicked = 0;
-
-
-
-
 
 //Creating a function to check answer
 function checkAnswer(event) {
@@ -156,7 +151,6 @@ function checkAnswer(event) {
   }
 
 };
-
 
 // Time function
 
@@ -357,8 +351,6 @@ function quizOver() {
     submitBtn.setAttribute("style", "align: center");
   }
 }
-
-
 
 //highscore function
 submitBtn.addEventListener("click", function (event) {
