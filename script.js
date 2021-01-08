@@ -50,7 +50,7 @@ h1.textContent = "Coding Quiz Challenge";
 //Subtext
 var h2 = document.querySelector("#subtext");
 h2.textContent =
-  "Try to answer the folling code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+  "Try to answer the following code-related questons within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
 
 
 //Hide button and texts
