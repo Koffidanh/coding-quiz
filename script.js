@@ -394,11 +394,15 @@ highScorePgBtn.addEventListener("click", function (event) {
   goBackBtn.style.display = "block";
   clearBtn.style.display = "block";
   storetext.style.display = "block";
+  
 });
 
 // Go back function
 goBackBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  //Variable
+  clicked = 0;
+  secondsLeft = 50;
   //Main title
   var h1 = document.querySelector("#text");
   h1.textContent = "Coding Quiz Challenge";
@@ -411,9 +415,11 @@ goBackBtn.addEventListener("click", function (event) {
   goBackBtn.style.display = "none";
   clearBtn.style.display = "none";
   h3.style.display = "none";
+
 });
 // Clear function
 clearBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  h3.remove();
+  h3.textContent = "";
+  return;
 });
