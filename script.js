@@ -202,7 +202,7 @@ function nextQuestion() {
         answer3Btn.textContent = "3. alerts";
         answer3Btn.value = "alerts";
         answer4Btn.textContent = "4. numbers";
-        answer4Btn.valu = "numbers";
+        answer4Btn.value = "numbers";
       }
 
       if (

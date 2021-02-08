@@ -25,3 +25,15 @@ This shows run out time quiz.
 ## View Highscores page
 This page can only beeing viewed by clicked on the "View Highscores" button. This page records the preview score of the user. And two buttons, " Go Back" and " Clear". The " Go Back" button is to get back to the main page. "Clear" button is to clear the initial and score from this page.
 ![viewhighscorepage](https://github.com/Koffidanh/coding-quiz/blob/main/Assets/viewhighscorepage.png)
+
+### Tools Used
+* Bootstrap
+* [Jquery](https://jquery.com/)
+* JavaScript
+* CSS
+
+### Contact
+* email: koffi.danh@gmail.com
+
+
+* License by MIT
