@@ -28,12 +28,11 @@ This page can only beeing viewed by clicked on the "View Highscores" button. Thi
 
 ### Tools Used
 * Bootstrap
-* [Jquery](https://jquery.com/)
 * JavaScript
 * CSS
 
 ### Contact
+* Koffi Danhounsrou
 * email: koffi.danh@gmail.com
-
-
 * License by MIT
+
